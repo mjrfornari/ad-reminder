@@ -34,7 +34,7 @@ class App extends Component {
 		var time_min = 30;
 		var time_sec = 0;
 		var mincalc = min > 30 ? min - 30 : min;
-		time_min = 30 - mincalc - (sec > 1 ? 1 : 0);
+		time_min = 30 - mincalc - (sec >= 1 ? 1 : 0);
 		time_sec = sec >= 1 ? 60 - sec : 0;
 		var ad = this.state.ad;
 		console.log(time_min, time_sec);
