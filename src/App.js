@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import RobsonJorge from './Robson_Jorge.gif';
+import Titio from './titio_alert.mp3';
 import { notifyMe } from './index';
 import './App.css';
 
@@ -15,6 +16,7 @@ class App extends Component {
 		this.calcTime = this.calcTime.bind(this);
 		this.setAd = this.setAd.bind(this);
 		this.showNotifications = this.showNotifications.bind(this);
+		this.soundTitio = new Audio(Titio);
 	}
 
 	componentDidMount() {
@@ -40,7 +42,12 @@ class App extends Component {
 		console.log(time_min, time_sec);
 		if (time_min === 0 && time_sec === 1) {
 			ad = false;
-			this.showNotifications();
+			// this.showNotifications();
+			this.soundTitio.loop = true;
+			this.soundTitio.play();
+			setInterval(() => {
+				this.soundTitio.loop = false;
+			}, 5000);
 		}
 		this.setState({ time_min: time_min, time_sec: time_sec, ad: ad });
 	}
