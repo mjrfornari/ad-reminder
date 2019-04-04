@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import RobsonJorge from './robsonjorge_big.png';
+import RobsonJorge from './Robson_Jorge.gif';
+import { notifyMe } from './index';
 import './App.css';
 
 class App extends Component {
@@ -13,12 +14,17 @@ class App extends Component {
 		};
 		this.calcTime = this.calcTime.bind(this);
 		this.setAd = this.setAd.bind(this);
+		this.showNotifications = this.showNotifications.bind(this);
 	}
 
 	componentDidMount() {
 		setInterval(() => {
 			this.calcTime();
 		}, 1000);
+	}
+
+	showNotifications() {
+		notifyMe();
 	}
 
 	calcTime() {
@@ -29,9 +35,13 @@ class App extends Component {
 		var time_sec = 0;
 		var mincalc = min > 30 ? min - 30 : min;
 		time_min = 30 - mincalc - (sec > 1 ? 1 : 0);
-		time_sec = sec > 1 ? 60 - sec : 0;
+		time_sec = sec >= 1 ? 60 - sec : 0;
 		var ad = this.state.ad;
-		if (time_min === 29 && time_sec === 59) ad = false;
+		console.log(time_min, time_sec);
+		if (time_min === 0 && time_sec === 1) {
+			ad = false;
+			this.showNotifications();
+		}
 		this.setState({ time_min: time_min, time_sec: time_sec, ad: ad });
 	}
 
@@ -40,7 +50,10 @@ class App extends Component {
 		var date = new Date();
 		var hour = date.getHours();
 		var min = date.getMinutes();
-		this.setState({ ad: true, lastAd: hour + ':' + min });
+		this.setState({
+			ad: true,
+			lastAd: hour + ':' + (min >= 10 ? String(min) : '0' + String(min))
+		});
 	}
 
 	render() {
