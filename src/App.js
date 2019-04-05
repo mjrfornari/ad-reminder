@@ -35,7 +35,7 @@ class App extends Component {
 		var sec = date.getSeconds(); // 0-59
 		var time_min = 30;
 		var time_sec = 0;
-		var mincalc = min > 30 ? min - 30 : min;
+		var mincalc = min >= 30 ? min - 30 : min;
 		time_min = 30 - mincalc - (sec >= 1 ? 1 : 0);
 		time_sec = sec >= 1 ? 60 - sec : 0;
 		var ad = this.state.ad;
@@ -46,7 +46,7 @@ class App extends Component {
 			this.soundTitio.loop = true;
 			this.soundTitio.play();
 			setInterval(() => {
-				this.soundTitio.loop = false;
+				this.soundTitio.play();
 			}, 5000);
 		}
 		this.setState({ time_min: time_min, time_sec: time_sec, ad: ad });
