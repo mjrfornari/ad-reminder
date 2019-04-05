@@ -43,11 +43,8 @@ class App extends Component {
 		if (time_min === 0 && time_sec === 1) {
 			ad = false;
 			// this.showNotifications();
-			this.soundTitio.loop = true;
+			this.soundTitio.loop = false;
 			this.soundTitio.play();
-			setInterval(() => {
-				this.soundTitio.play();
-			}, 5000);
 		}
 		this.setState({ time_min: time_min, time_sec: time_sec, ad: ad });
 	}
